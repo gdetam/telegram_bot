@@ -1,1 +1,1 @@
-**Telegram bot for selecting and listening to audiobooks**
+**Telegram bot for selecting and listening audiobooks**
