@@ -2,9 +2,9 @@ import psycopg2
 from author import Author
 
 con = psycopg2.connect(
-    database="telegram_bot_audiobooks",
+    database="name_db",
     user="postgres",
-    password="fallen365",
+    password="password",
     host="127.0.0.1",
     port="5432"
 )
