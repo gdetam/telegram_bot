@@ -1,4 +1,6 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String
+"""this is authors table structure."""
+
+from sqlalchemy import Column, Integer, MetaData, String, Table
 
 
 meta = MetaData()

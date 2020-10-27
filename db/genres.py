@@ -1,4 +1,6 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String
+"""this is genres table structure."""
+
+from sqlalchemy import Column, Integer, MetaData, String, Table
 
 
 meta = MetaData()
