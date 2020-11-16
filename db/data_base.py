@@ -1,14 +1,22 @@
 """this is data base's query creator."""
+from sqlalchemy.orm import sessionmaker
 
-from config import connection_for_engine
+from config import CONNECTION_FOR_ENGINE
+from models import base
 
-from db.books import books
+from models.book import Books
 
-from sqlalchemy import Column, Table, asc, create_engine, func, select
+from sqlalchemy import Column, create_engine
 
 
 class DB(object):
     """class with queries to DB."""
+    engine = create_engine(CONNECTION_FOR_ENGINE)
+
+    base.Base.metadata.create_all(engine, checkfirst=True)
+    Session = sessionmaker(bind=engine)
+
+    session = Session()
 
     LIMIT = 2
 
@@ -16,27 +24,23 @@ class DB(object):
     def create_connector_db():
         """Initialize connection to the DB."""
         engine = create_engine(
-            connection_for_engine,
+            CONNECTION_FOR_ENGINE,
             echo=True
         )
         connection = engine.connect()
         return connection
 
     @staticmethod
-    def create_query_table(
-            table_name: Table,
-            current_page: int,
-            column_name_for_order: Column):
+    def create_query_table(table_name: base,
+                           current_page: int,
+                           column_name_for_order: Column):
         """Get a limit count of author or genre records from the DB."""
         offset = DB.LIMIT * current_page
-        connection = DB.create_connector_db()
-        r = table_name \
-            .select() \
-            .offset(offset) \
-            .limit(DB.LIMIT) \
-            .order_by(asc(column_name_for_order))
-        result = connection.execute(r)
-        DB.close_connector_db(connection)
+        result: table_name = DB.session \
+                               .query(table_name) \
+                               .order_by(column_name_for_order.asc()) \
+                               .offset(offset) \
+                               .limit(DB.LIMIT).all()
         return result
 
     @staticmethod
@@ -46,37 +50,26 @@ class DB(object):
             column_name: Column):
         """Get a list of DB books matching id item."""
         offset = DB.LIMIT * current_page
-        connection = DB.create_connector_db()
-        r = select([books]) \
-            .where(item_id == column_name) \
+        result: Books = DB.session \
+            .query(Books) \
+            .filter(item_id == column_name) \
+            .order_by(Books.name.asc()) \
             .offset(offset) \
-            .limit(DB.LIMIT) \
-            .order_by(asc(books.c.name))
-        result = connection.execute(r)
-        DB.close_connector_db(connection)
+            .limit(DB.LIMIT).all()
         return result
 
     @staticmethod
     def get_book_by_id(
             book_id: int):
         """Get the selected books from DB."""
-        connection = DB.create_connector_db()
-        r = select([books]) \
-            .where(book_id == books.c.id)
-        result = connection.execute(r)
-        DB.close_connector_db(connection)
+        result: int = DB.session.query(Books).filter(book_id == Books.id)
         return result
 
     @staticmethod
-    def get_count_page(
-            table_name: Table):
+    def get_count_page(table_name: base):
         """Get from DB the count of pages containing authors or genres."""
-        connection = DB.create_connector_db()
-        c = select([func.count()]) \
-            .select_from(table_name)
-        result = connection.execute(c)
-        count_page = round(int(result.fetchall()[0][0]) / DB.LIMIT) - 1
-        DB.close_connector_db(connection)
+        result: int = DB.session.query(table_name).count()
+        count_page = round(result / DB.LIMIT) - 1
         return count_page
 
     @staticmethod
@@ -84,23 +77,15 @@ class DB(object):
             item_id: int,
             column_name: Column):
         """Get from DB the count of pages containing books."""
-        connection = DB.create_connector_db()
-        c = select([func.count()]) \
-            .select_from(books) \
-            .where(item_id == column_name)
-        result = connection.execute(c)
-        count_page = round(int(result.fetchall()[0][0]) / DB.LIMIT) - 1
-        DB.close_connector_db(connection)
+        result: int = DB.session.query(Books).filter(item_id == column_name).count()
+        count_page = round(result / DB.LIMIT) - 1
         return count_page
 
     @staticmethod
     def get_count_books():
         """Get the count of books from DB."""
-        connection = DB.create_connector_db()
-        c = select([func.count()]).select_from(books)
-        result = connection.execute(c)
-        count_books = int(result.fetchall()[0][0])
-        DB.close_connector_db(connection)
+        result: int = DB.session.query(Books).count()
+        count_books = int(result)
         return count_books
 
     @staticmethod
