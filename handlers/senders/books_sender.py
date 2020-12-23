@@ -2,7 +2,7 @@
 
 from aiogram.types import CallbackQuery
 
-from db.db_querys.book_by_id_query import get_book_by_id
+from db.db_queries.book_by_id_query import get_book_by_id
 
 from keyboards.books_keyboards import create_book_keyboard_by_list
 

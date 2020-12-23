@@ -2,8 +2,8 @@
 
 from aiogram.types import CallbackQuery
 
-from db.db_querys.count_page_query import get_count_page
-from db.db_querys.table_query import create_query_table
+from db.db_queries.count_page_query import get_count_page
+from db.db_queries.table_query import create_query_table
 
 from keyboards.genres_keyboards import create_genres_keyboard
 
