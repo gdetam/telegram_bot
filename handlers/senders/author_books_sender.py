@@ -2,8 +2,8 @@
 
 from aiogram.types import CallbackQuery
 
-from db.db_querys.author_books_query import get_author_books_by_item_id
-from db.db_querys.count_books_pages_query import get_count_books_pages_by_item_id
+from db.db_queries.author_books_query import get_author_books_by_item_id
+from db.db_queries.count_books_pages_query import get_count_books_pages_by_item_id
 
 from keyboards.books_keyboards import create_books_keyboard_by_author
 

@@ -2,8 +2,8 @@
 
 from aiogram.types import CallbackQuery
 
-from db.db_querys.count_books_pages_query import get_count_books_pages_by_item_id
-from db.db_querys.genre_and_reader_books_query import get_genre_and_reader_books_by_item_id
+from db.db_queries.count_books_pages_query import get_count_books_pages_by_item_id
+from db.db_queries.genre_and_reader_books_query import get_genre_and_reader_books_by_item_id
 from keyboards.books_keyboards import create_books_keyboard_by_genre
 
 from models.genre import Genres

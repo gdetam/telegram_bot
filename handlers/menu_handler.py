@@ -6,7 +6,7 @@ from aiogram.types import CallbackQuery, Message
 
 from bot import dp
 
-from db.db_querys.count_books_query import get_count_books
+from db.db_queries.count_books_query import get_count_books
 
 from handlers.callback_handler import callback
 from handlers.senders.books_sender import send_book_by_book_id
