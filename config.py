@@ -7,6 +7,9 @@ import configparser
 config = configparser.ConfigParser()
 # read the config
 config.read('E:/Python/my_adult_telegram_bot/settings.ini')
-
-bot_token = config['bot_token']['bot_token']
-connection_for_engine = config['connection_for_engine']['connection_for_engine']
+PATH = config['PATH']['PATH']
+BOT_TOKEN = config['BOT_TOKEN']['BOT_TOKEN']
+CONNECTION_FOR_ENGINE = config['CONNECTION_FOR_ENGINE']['CONNECTION_FOR_ENGINE']
+# flag for start db_inserter.py control and save in data base
+inserter_flag = False
+LIMIT = 2
