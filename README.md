@@ -16,7 +16,6 @@ For dependencies used Pipreqs 0.4.10
 
 Thank you for choosing AUDI0B00K.B0T telegram bot!
 
-
 ##### License
 
 AUDI0B00K.B0T is an open source telegram bot licensed:
@@ -39,7 +38,6 @@ Python 3.8.3
 ##### Благодарность :heart:
 
 Благодарим вас за выбор AUDI0B00K.B0T телеграм бот!
-
 
 ##### Лицензия
 
