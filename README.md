@@ -6,7 +6,7 @@ AUDI0B00K.B0T is a telegram bot for select and listen audiobooks.
 You can select an audiobook by an author as well as by a genre.
 In case you want something new, AUDI0B00K.B0T has a selection of a random audiobook.
 
-##### Environment :snake:
+##### Used tools :snake:
 
 Postgresql 12.4
 Python 3.8.3
@@ -29,7 +29,7 @@ AUDI0B00K.B0T - это телеграм бот для выбора и просл
 Вы можете выбрать аудиокнигу как по авторам, так и по и жанрам.
 На случай если вы хотите чего-то нового - в AUDI0B00K.B0T реализован выбор случайной аудиокниги.
 
-##### Окружение :snake:
+##### Используемые инструменты :snake:
 
 Postgresql 12.4
 Python 3.8.3
